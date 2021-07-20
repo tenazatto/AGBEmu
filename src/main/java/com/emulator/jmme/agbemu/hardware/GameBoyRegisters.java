@@ -68,7 +68,7 @@ public class GameBoyRegisters {
     }
 
     public void setCFlag(boolean cFlag) {
-        F = (short) (F | ((cFlag) ? 0x01 << 4 : 0x00 << 4));
+        F = (short) ((cFlag) ? F | 0b00010000 : F & 0b11101111);
     }
 
     public boolean getHFlag() {
@@ -76,7 +76,7 @@ public class GameBoyRegisters {
     }
 
     public void setHFlag(boolean hFlag) {
-        F = (short) (F | ((hFlag) ? 0x01 << 5 : 0x00 << 5));
+        F = (short) ((hFlag) ? F | 0b00100000 : F & 0b11011111);
     }
 
     public boolean getNFlag() {
@@ -84,7 +84,7 @@ public class GameBoyRegisters {
     }
 
     public void setNFlag(boolean nFlag) {
-        F = (short) (F | ((nFlag) ? 0x01 << 6 : 0x00 << 6));
+        F = (short) ((nFlag) ? F | 0b01000000 : F & 0b10111111);
     }
 
     public boolean getZFlag() {
@@ -92,7 +92,7 @@ public class GameBoyRegisters {
     }
 
     public void setZFlag(boolean zFlag) {
-        F = (short) (F | ((zFlag) ? 0x01 << 7 : 0x00 << 7));
+        F = (short) ((zFlag) ? F | 0b10000000 : F & 0b01111111);
     }
 
     public short getB() {

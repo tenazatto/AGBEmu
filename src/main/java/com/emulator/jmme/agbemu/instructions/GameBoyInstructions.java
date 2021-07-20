@@ -1,6 +1,7 @@
 package com.emulator.jmme.agbemu.instructions;
 
 import com.emulator.jmme.agbemu.hardware.GameBoyRegisters;
+import com.emulator.jmme.agbemu.utils.GameBoyUtils;
 import com.emulator.jmme.base.instructions.Instructions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,7 +39,7 @@ public class GameBoyInstructions implements Instructions {
 	public void LD_B_n(int n, GameBoyRegisters registers){
 		registers.setB((short) n);
 
-		logger.info("B: {}", registers.getB());
+		logger.info("B: {}", GameBoyUtils.byteValue(registers.getB()));
 		logger.info("LD B, n - Instrução executada");
 	}
 
@@ -73,7 +74,7 @@ public class GameBoyInstructions implements Instructions {
 	public void LD_C_n(int n, GameBoyRegisters registers){
 		registers.setC((short) n);
 
-		logger.info("C: {}", registers.getC());
+		logger.info("C: {}", GameBoyUtils.byteValue(registers.getC()));
 		logger.info("LD C, n - Instrução executada");
 	}
 
@@ -214,7 +215,7 @@ public class GameBoyInstructions implements Instructions {
 			registers.setPC(registers.getPC() + n);
 		}
 
-		logger.info("Endereço: {}", new BigInteger(String.valueOf(registers.getPC())).toString(16).toUpperCase());
+		logger.info("PC: {}", GameBoyUtils.hexValue(registers.getPC()));
 		logger.info("JP NC, n - Instrução executada");
 	}
 
@@ -265,6 +266,7 @@ public class GameBoyInstructions implements Instructions {
 	public void INC_A(GameBoyRegisters registers){
 		registers.setA((short) (registers.getA() + 1));
 
+		logger.info("A: {}", GameBoyUtils.byteValue(registers.getA()));
 		logger.info("INC A - Instrução executada");
 	}
 
@@ -513,7 +515,8 @@ public class GameBoyInstructions implements Instructions {
     public void LD_A_B(GameBoyRegisters registers){
 		registers.setA(registers.getB());
 
-		logger.info("A: {}, B: {}", registers.getA(), registers.getB());
+		logger.info("A: {}, B: {}",
+				GameBoyUtils.byteValue(registers.getA()), GameBoyUtils.byteValue(registers.getB()));
 		logger.info("LD A, B - Instrução executada");
 	}
 
@@ -816,7 +819,7 @@ public class GameBoyInstructions implements Instructions {
 	public void JP_nn(int nn, GameBoyRegisters registers){
 		registers.setPC(nn);
 
-		logger.info("Endereço: {}", new BigInteger(String.valueOf(registers.getPC())).toString(16).toUpperCase());
+		logger.info("PC: {}", GameBoyUtils.hexValue(registers.getPC()));
 		logger.info("JP nn - Instrução executada");
 	}
 
@@ -897,7 +900,7 @@ public class GameBoyInstructions implements Instructions {
 		registers.setCFlag(registers.getA() < n);
 
 		registers.setA(result);
-		logger.info("A: {}", registers.getA());
+		logger.info("A: {}", GameBoyUtils.byteValue(registers.getA()));
 		logger.info("Flags - Z: {}, N: {}, H: {}, C: {}",
 				registers.getZFlag(), registers.getNFlag(), registers.getHFlag(), registers.getCFlag());
 		logger.info("SUB A, n - Instrução executada");
@@ -1838,7 +1841,7 @@ public class GameBoyInstructions implements Instructions {
 	public void SET_1_E(GameBoyRegisters registers){
 		registers.setE((short) (registers.getE() | (1 << 1)));
 
-		logger.info("E: {}", registers.getE());
+		logger.info("E: {}", GameBoyUtils.byteValue(registers.getE()));
 		logger.info("SET 1, E - Instrução executada");
 	}
 

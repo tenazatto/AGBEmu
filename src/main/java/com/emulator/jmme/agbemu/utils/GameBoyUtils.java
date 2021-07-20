@@ -3,8 +3,10 @@ package com.emulator.jmme.agbemu.utils;
 import com.emulator.jmme.agbemu.hardware.GameBoyBus;
 import com.emulator.jmme.agbemu.hardware.GameBoyRegisters;
 import com.emulator.jmme.agbemu.instructions.GameBoyOpcode;
+import com.google.common.base.Strings;
 
 import java.lang.reflect.Method;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -32,5 +34,15 @@ public class GameBoyUtils {
             }
         });
         return params;
+    }
+
+    public static String byteValue(Object value) {
+        String hexString = new BigInteger(String.valueOf(value)).abs().toString(2).toUpperCase();
+        return "0b" + Strings.padStart(hexString, 8, '0');
+    }
+
+    public static String hexValue(Object value) {
+        String hexString = new BigInteger(String.valueOf(value)).abs().toString(16).toUpperCase();
+        return "0x" + Strings.padStart(hexString, 4, '0');
     }
 }
