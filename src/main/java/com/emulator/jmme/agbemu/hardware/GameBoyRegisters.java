@@ -55,7 +55,7 @@ public class GameBoyRegisters {
     }
 
     public short getAF() {
-        return (short)(A << 8 + F);
+        return (short)(A << 8 | F);
     }
 
     public void setAF(short af) {
@@ -112,7 +112,7 @@ public class GameBoyRegisters {
     }
 
     public short getBC() {
-        return (short)(B << 8 + C);
+        return (short)(B << 8 | C);
     }
 
     public void setBC(short bc) {
@@ -137,7 +137,7 @@ public class GameBoyRegisters {
     }
 
     public short getDE() {
-        return (short)(D << 8 + E);
+        return (short)(D << 8 | E);
     }
 
     public void setDE(short de) {
@@ -162,7 +162,7 @@ public class GameBoyRegisters {
     }
 
     public short getHL() {
-        return (short)(H << 8 + L);
+        return (short)(H << 8 | L);
     }
 
     public void setHL(short hl) {

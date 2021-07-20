@@ -85,6 +85,7 @@ public class GameBoyCPU implements CPU {
             e.printStackTrace();
         } catch (InvocationTargetException e) {
             e.printStackTrace();
+            throw new UnsupportedOperationException(gameBoyOpcode.name() + " operation not implemented");
         }
     }
 

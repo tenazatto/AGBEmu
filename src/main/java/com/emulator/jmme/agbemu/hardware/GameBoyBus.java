@@ -19,6 +19,10 @@ public class GameBoyBus implements Bus {
     }
 
     public byte read_cartridge(int address) {
+        if (address < 0) {
+            address = 0xFFFF + address;
+        }
+
         return this.cartridge.getContent()[address];
     }
 

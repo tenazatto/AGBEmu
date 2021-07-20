@@ -19,8 +19,11 @@ public class GameBoyInstructions implements Instructions {
 		throw new UnsupportedOperationException("Not yet implemented");
 	}
 
-	public void LD__BC__A(){
-		throw new UnsupportedOperationException("Not yet implemented");
+	public void LD__BC__A(GameBoyBus bus, GameBoyRegisters registers){
+		bus.write_memory(registers.getBC(), registers.getA());
+
+		logger.info("Endereço: {}, Valor: {}", GameBoyUtils.hexValue(registers.getBC()), GameBoyUtils.byteValue(registers.getA()));
+		logger.info("LD (BC), A - Instrução executada");
 	}
 
 	public void INC_BC(){
@@ -199,8 +202,13 @@ public class GameBoyInstructions implements Instructions {
 		throw new UnsupportedOperationException("Not yet implemented");
 	}
 
-	public void LDI_A__HL(){
-		throw new UnsupportedOperationException("Not yet implemented");
+	public void LDI_A__HL(GameBoyBus bus, GameBoyRegisters registers){
+		registers.setA(bus.read_memory(registers.getHL()));
+		registers.setHL((short) (registers.getHL()+1));
+
+		logger.info("Endereço: {}, Valor: {}", GameBoyUtils.hexValue(registers.getHL() - 1), GameBoyUtils.byteValue(registers.getA()));
+		logger.info("H: {}, L: {}", GameBoyUtils.byteValue(registers.getH()), GameBoyUtils.byteValue(registers.getL()));
+		logger.info("LDI A, (HL) - Instrução executada");
 	}
 
 	public void DEC_HL(){
@@ -318,84 +326,154 @@ public class GameBoyInstructions implements Instructions {
 		throw new UnsupportedOperationException("Not yet implemented");
 	}
 
-	public void LD_B_D(){
-		throw new UnsupportedOperationException("Not yet implemented");
+	public void LD_B_D(GameBoyRegisters registers){
+		registers.setB(registers.getD());
+
+		logger.info("B: {}, D: {}",
+				GameBoyUtils.byteValue(registers.getB()), GameBoyUtils.byteValue(registers.getD()));
+		logger.info("LD B, D - Instrução executada");
 	}
 
-	public void LD_B_E(){
-		throw new UnsupportedOperationException("Not yet implemented");
+	public void LD_B_E(GameBoyRegisters registers){
+		registers.setB(registers.getE());
+
+		logger.info("B: {}, E: {}",
+				GameBoyUtils.byteValue(registers.getB()), GameBoyUtils.byteValue(registers.getE()));
+		logger.info("LD B, E - Instrução executada");
 	}
 
-	public void LD_B_H(){
-		throw new UnsupportedOperationException("Not yet implemented");
+	public void LD_B_H(GameBoyRegisters registers){
+		registers.setB(registers.getH());
+
+		logger.info("B: {}, H: {}",
+				GameBoyUtils.byteValue(registers.getB()), GameBoyUtils.byteValue(registers.getH()));
+		logger.info("LD B, H - Instrução executada");
 	}
 
-	public void LD_B_L(){
-		throw new UnsupportedOperationException("Not yet implemented");
+	public void LD_B_L(GameBoyRegisters registers){
+		registers.setB(registers.getL());
+
+		logger.info("B: {}, L: {}",
+				GameBoyUtils.byteValue(registers.getB()), GameBoyUtils.byteValue(registers.getL()));
+		logger.info("LD B, L - Instrução executada");
 	}
 
 	public void LD_B__HL(){
 		throw new UnsupportedOperationException("Not yet implemented");
 	}
 
-	public void LD_B_A(){
-		throw new UnsupportedOperationException("Not yet implemented");
+	public void LD_B_A(GameBoyRegisters registers){
+		registers.setB(registers.getA());
+
+		logger.info("B: {}, A: {}",
+				GameBoyUtils.byteValue(registers.getB()), GameBoyUtils.byteValue(registers.getA()));
+		logger.info("LD B, A - Instrução executada");
 	}
 
-    public void LD_C_B(){
-		throw new UnsupportedOperationException("Not yet implemented");
+    public void LD_C_B(GameBoyRegisters registers){
+		registers.setC(registers.getB());
+
+		logger.info("C: {}, B: {}",
+				GameBoyUtils.byteValue(registers.getC()), GameBoyUtils.byteValue(registers.getB()));
+		logger.info("LD C, B - Instrução executada");
 	}
 
-	public void LD_C_C(){
-		throw new UnsupportedOperationException("Not yet implemented");
+	public void LD_C_C(GameBoyRegisters registers){
+		registers.setC(registers.getC());
+
+		logger.info("C: {}", GameBoyUtils.byteValue(registers.getC()));
+		logger.info("LD C, C - Instrução executada");
 	}
 
-	public void LD_C_D(){
-		throw new UnsupportedOperationException("Not yet implemented");
+	public void LD_C_D(GameBoyRegisters registers){
+		registers.setC(registers.getD());
+
+		logger.info("C: {}, D: {}",
+				GameBoyUtils.byteValue(registers.getC()), GameBoyUtils.byteValue(registers.getD()));
+		logger.info("LD C, D - Instrução executada");
 	}
 
-	public void LD_C_E(){
-		throw new UnsupportedOperationException("Not yet implemented");
+	public void LD_C_E(GameBoyRegisters registers){
+		registers.setC(registers.getE());
+
+		logger.info("C: {}, E: {}",
+				GameBoyUtils.byteValue(registers.getC()), GameBoyUtils.byteValue(registers.getE()));
+		logger.info("LD C, E - Instrução executada");
 	}
 
-	public void LD_C_H(){
-		throw new UnsupportedOperationException("Not yet implemented");
+	public void LD_C_H(GameBoyRegisters registers){
+		registers.setC(registers.getH());
+
+		logger.info("C: {}, H: {}",
+				GameBoyUtils.byteValue(registers.getC()), GameBoyUtils.byteValue(registers.getH()));
+		logger.info("LD C, H - Instrução executada");
 	}
 
-	public void LD_C_L(){
-		throw new UnsupportedOperationException("Not yet implemented");
+	public void LD_C_L(GameBoyRegisters registers){
+		registers.setC(registers.getL());
+
+		logger.info("C: {}, L: {}",
+				GameBoyUtils.byteValue(registers.getC()), GameBoyUtils.byteValue(registers.getL()));
+		logger.info("LD C, L - Instrução executada");
 	}
 
 	public void LD_C__HL(){
 		throw new UnsupportedOperationException("Not yet implemented");
 	}
 
-	public void LD_C_A(){
-		throw new UnsupportedOperationException("Not yet implemented");
+	public void LD_C_A(GameBoyRegisters registers){
+		registers.setC(registers.getA());
+
+		logger.info("C: {}, A: {}",
+				GameBoyUtils.byteValue(registers.getC()), GameBoyUtils.byteValue(registers.getA()));
+		logger.info("LD C, A - Instrução executada");
 	}
 
-    public void LD_D_B(){
-		throw new UnsupportedOperationException("Not yet implemented");
+    public void LD_D_B(GameBoyRegisters registers){
+		registers.setD(registers.getB());
+
+		logger.info("D: {}, B: {}",
+				GameBoyUtils.byteValue(registers.getD()), GameBoyUtils.byteValue(registers.getB()));
+		logger.info("LD D, B - Instrução executada");
 	}
 
-	public void LD_D_C(){
-		throw new UnsupportedOperationException("Not yet implemented");
+	public void LD_D_C(GameBoyRegisters registers){
+		registers.setD(registers.getC());
+
+		logger.info("D: {}, C: {}",
+				GameBoyUtils.byteValue(registers.getD()), GameBoyUtils.byteValue(registers.getC()));
+		logger.info("LD D, C - Instrução executada");
 	}
 
-	public void LD_D_D(){
-		throw new UnsupportedOperationException("Not yet implemented");
+	public void LD_D_D(GameBoyRegisters registers){
+		registers.setD(registers.getD());
+
+		logger.info("D: {}", GameBoyUtils.byteValue(registers.getD()));
+		logger.info("LD D, D - Instrução executada");
 	}
 
-	public void LD_D_E(){
-		throw new UnsupportedOperationException("Not yet implemented");
+	public void LD_D_E(GameBoyRegisters registers){
+		registers.setD(registers.getE());
+
+		logger.info("D: {}, E: {}",
+				GameBoyUtils.byteValue(registers.getD()), GameBoyUtils.byteValue(registers.getE()));
+		logger.info("LD D, E - Instrução executada");
 	}
 
-	public void LD_D_H(){
-		throw new UnsupportedOperationException("Not yet implemented");
+	public void LD_D_H(GameBoyRegisters registers){
+		registers.setD(registers.getH());
+
+		logger.info("D: {}, H: {}",
+				GameBoyUtils.byteValue(registers.getD()), GameBoyUtils.byteValue(registers.getH()));
+		logger.info("LD D, H - Instrução executada");
 	}
 
-	public void LD_D_L(){
-		throw new UnsupportedOperationException("Not yet implemented");
+	public void LD_D_L(GameBoyRegisters registers){
+		registers.setD(registers.getL());
+
+		logger.info("D: {}, L: {}",
+				GameBoyUtils.byteValue(registers.getD()), GameBoyUtils.byteValue(registers.getL()));
+		logger.info("LD D, L - Instrução executada");
 	}
 
 	public void LD_D__HL(){
@@ -409,100 +487,181 @@ public class GameBoyInstructions implements Instructions {
 		logger.info("LD D, A - Instrução executada");
 	}
 
-    public void LD_E_B(){
-		throw new UnsupportedOperationException("Not yet implemented");
+    public void LD_E_B(GameBoyRegisters registers){
+		registers.setE(registers.getB());
+
+		logger.info("E: {}, B: {}",
+				GameBoyUtils.byteValue(registers.getE()), GameBoyUtils.byteValue(registers.getB()));
+		logger.info("LD E, B - Instrução executada");
 	}
 
-	public void LD_E_C(){
-		throw new UnsupportedOperationException("Not yet implemented");
+	public void LD_E_C(GameBoyRegisters registers){
+		registers.setE(registers.getC());
+
+		logger.info("E: {}, C: {}",
+				GameBoyUtils.byteValue(registers.getE()), GameBoyUtils.byteValue(registers.getC()));
+		logger.info("LD E, C - Instrução executada");
 	}
 
-	public void LD_E_D(){
-		throw new UnsupportedOperationException("Not yet implemented");
+	public void LD_E_D(GameBoyRegisters registers){
+		registers.setE(registers.getD());
+
+		logger.info("E: {}, D: {}",
+				GameBoyUtils.byteValue(registers.getE()), GameBoyUtils.byteValue(registers.getD()));
+		logger.info("LD E, D - Instrução executada");
 	}
 
-	public void LD_E_E(){
-		throw new UnsupportedOperationException("Not yet implemented");
+	public void LD_E_E(GameBoyRegisters registers){
+		registers.setE(registers.getE());
+
+		logger.info("E: {}", GameBoyUtils.byteValue(registers.getE()));
+		logger.info("LD E, E - Instrução executada");
 	}
 
-	public void LD_E_H(){
-		throw new UnsupportedOperationException("Not yet implemented");
+	public void LD_E_H(GameBoyRegisters registers){
+		registers.setE(registers.getH());
+
+		logger.info("E: {}, H: {}",
+				GameBoyUtils.byteValue(registers.getE()), GameBoyUtils.byteValue(registers.getH()));
+		logger.info("LD E, H - Instrução executada");
 	}
 
-	public void LD_E_L(){
-		throw new UnsupportedOperationException("Not yet implemented");
+	public void LD_E_L(GameBoyRegisters registers){
+		registers.setE(registers.getL());
+
+		logger.info("E: {}, L: {}",
+				GameBoyUtils.byteValue(registers.getE()), GameBoyUtils.byteValue(registers.getL()));
+		logger.info("LD E, L - Instrução executada");
 	}
 
 	public void LD_E__HL(){
 		throw new UnsupportedOperationException("Not yet implemented");
 	}
 
-	public void LD_E_A(){
-		throw new UnsupportedOperationException("Not yet implemented");
+	public void LD_E_A(GameBoyRegisters registers){
+		registers.setE(registers.getA());
+
+		logger.info("E: {}, A: {}",
+				GameBoyUtils.byteValue(registers.getE()), GameBoyUtils.byteValue(registers.getA()));
+		logger.info("LD E, A - Instrução executada");
 	}
 
-    public void LD_H_B(){
-		throw new UnsupportedOperationException("Not yet implemented");
+    public void LD_H_B(GameBoyRegisters registers){
+		registers.setH(registers.getB());
+
+		logger.info("H: {}, B: {}",
+				GameBoyUtils.byteValue(registers.getH()), GameBoyUtils.byteValue(registers.getB()));
+		logger.info("LD H, B - Instrução executada");
 	}
 
-	public void LD_H_C(){
-		throw new UnsupportedOperationException("Not yet implemented");
+	public void LD_H_C(GameBoyRegisters registers){
+		registers.setH(registers.getC());
+
+		logger.info("H: {}, C: {}",
+				GameBoyUtils.byteValue(registers.getH()), GameBoyUtils.byteValue(registers.getC()));
+		logger.info("LD H, C - Instrução executada");
 	}
 
-	public void LD_H_D(){
-		throw new UnsupportedOperationException("Not yet implemented");
+	public void LD_H_D(GameBoyRegisters registers){
+		registers.setH(registers.getD());
+
+		logger.info("H: {}, D: {}",
+				GameBoyUtils.byteValue(registers.getH()), GameBoyUtils.byteValue(registers.getD()));
+		logger.info("LD H, D - Instrução executada");
 	}
 
-	public void LD_H_E(){
-		throw new UnsupportedOperationException("Not yet implemented");
+	public void LD_H_E(GameBoyRegisters registers){
+		registers.setH(registers.getE());
+
+		logger.info("H: {}, E: {}",
+				GameBoyUtils.byteValue(registers.getH()), GameBoyUtils.byteValue(registers.getE()));
+		logger.info("LD H, E - Instrução executada");
 	}
 
-	public void LD_H_H(){
-		throw new UnsupportedOperationException("Not yet implemented");
+	public void LD_H_H(GameBoyRegisters registers){
+		registers.setH(registers.getH());
+
+		logger.info("H: {}", GameBoyUtils.byteValue(registers.getH()));
+		logger.info("LD H, H - Instrução executada");
 	}
 
-	public void LD_H_L(){
-		throw new UnsupportedOperationException("Not yet implemented");
+	public void LD_H_L(GameBoyRegisters registers){
+		registers.setH(registers.getL());
+
+		logger.info("H: {}, L: {}",
+				GameBoyUtils.byteValue(registers.getH()), GameBoyUtils.byteValue(registers.getL()));
+		logger.info("LD H, L - Instrução executada");
 	}
 
 	public void LD_H__HL(){
 		throw new UnsupportedOperationException("Not yet implemented");
 	}
 
-	public void LD_H_A(){
-		throw new UnsupportedOperationException("Not yet implemented");
+	public void LD_H_A(GameBoyRegisters registers){
+		registers.setH(registers.getA());
+
+		logger.info("H: {}, A: {}",
+				GameBoyUtils.byteValue(registers.getH()), GameBoyUtils.byteValue(registers.getA()));
+		logger.info("LD H, A - Instrução executada");
 	}
 
-    public void LD_L_B(){
-		throw new UnsupportedOperationException("Not yet implemented");
+    public void LD_L_B(GameBoyRegisters registers){
+		registers.setL(registers.getB());
+
+		logger.info("L: {}, B: {}",
+				GameBoyUtils.byteValue(registers.getL()), GameBoyUtils.byteValue(registers.getB()));
+		logger.info("LD L, B - Instrução executada");
 	}
 
-	public void LD_L_C(){
-		throw new UnsupportedOperationException("Not yet implemented");
+	public void LD_L_C(GameBoyRegisters registers){
+		registers.setL(registers.getC());
+
+		logger.info("L: {}, C: {}",
+				GameBoyUtils.byteValue(registers.getL()), GameBoyUtils.byteValue(registers.getC()));
+		logger.info("LD L, C - Instrução executada");
 	}
 
-	public void LD_L_D(){
-		throw new UnsupportedOperationException("Not yet implemented");
+	public void LD_L_D(GameBoyRegisters registers){
+		registers.setL(registers.getD());
+
+		logger.info("L: {}, D: {}",
+				GameBoyUtils.byteValue(registers.getL()), GameBoyUtils.byteValue(registers.getD()));
+		logger.info("LD L, D - Instrução executada");
 	}
 
-	public void LD_L_E(){
-		throw new UnsupportedOperationException("Not yet implemented");
+	public void LD_L_E(GameBoyRegisters registers){
+		registers.setL(registers.getE());
+
+		logger.info("L: {}, E: {}",
+				GameBoyUtils.byteValue(registers.getL()), GameBoyUtils.byteValue(registers.getE()));
+		logger.info("LD L, E - Instrução executada");
 	}
 
-	public void LD_L_H(){
-		throw new UnsupportedOperationException("Not yet implemented");
+	public void LD_L_H(GameBoyRegisters registers){
+		registers.setL(registers.getH());
+
+		logger.info("L: {}, H: {}",
+				GameBoyUtils.byteValue(registers.getL()), GameBoyUtils.byteValue(registers.getH()));
+		logger.info("LD L, H - Instrução executada");
 	}
 
-	public void LD_L_L(){
-		throw new UnsupportedOperationException("Not yet implemented");
+	public void LD_L_L(GameBoyRegisters registers){
+		registers.setL(registers.getL());
+
+		logger.info("L: {}",GameBoyUtils.byteValue(registers.getL()));
+		logger.info("LD L, L - Instrução executada");
 	}
 
 	public void LD_L__HL(){
 		throw new UnsupportedOperationException("Not yet implemented");
 	}
 
-	public void LD_L_A(){
-		throw new UnsupportedOperationException("Not yet implemented");
+	public void LD_L_A(GameBoyRegisters registers){
+		registers.setL(registers.getA());
+
+		logger.info("L: {}, A: {}",
+				GameBoyUtils.byteValue(registers.getL()), GameBoyUtils.byteValue(registers.getA()));
+		logger.info("LD L, A - Instrução executada");
 	}
 
     public void LD__HL__B(){
@@ -804,8 +963,19 @@ public class GameBoyInstructions implements Instructions {
 		throw new UnsupportedOperationException("Not yet implemented");
 	}
 
-	public void OR_A(){
-		throw new UnsupportedOperationException("Not yet implemented");
+	public void OR_A(GameBoyRegisters registers){
+    	byte result = (byte) (registers.getA() | registers.getA());
+		registers.setA(result);
+
+		registers.setZFlag(result == 0);
+		registers.setNFlag(false);
+		registers.setHFlag(true);
+		registers.setCFlag(false);
+
+		logger.info("A: {}", GameBoyUtils.byteValue(registers.getA()));
+		logger.info("Flags - Z: {}, N: {}, H: {}, C: {}",
+				registers.getZFlag(), registers.getNFlag(), registers.getHFlag(), registers.getCFlag());
+		logger.info("OR A - Instrução executada");
 	}
 
     public void CP_B(){
@@ -1014,9 +1184,17 @@ public class GameBoyInstructions implements Instructions {
 	}
 
 	public void AND_n(byte n, GameBoyRegisters registers){
-		registers.setA((byte) (registers.getA() & n));
+    	byte result = (byte) (registers.getA() & n);
+		registers.setA(result);
+
+		registers.setZFlag(result == 0);
+		registers.setNFlag(false);
+		registers.setHFlag(true);
+		registers.setCFlag(false);
 
 		logger.info("A: {}", GameBoyUtils.byteValue(registers.getA()));
+		logger.info("Flags - Z: {}, N: {}, H: {}, C: {}",
+				registers.getZFlag(), registers.getNFlag(), registers.getHFlag(), registers.getCFlag());
 		logger.info("AND n - Instrução executada");
 	}
 

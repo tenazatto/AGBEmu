@@ -41,8 +41,19 @@ public class GameBoyUtils {
     }
 
     public static String byteValue(Object value) {
-        String hexString = new BigInteger(String.valueOf(value)).toString(2).toUpperCase();
-        return "0b" + Strings.padStart(hexString, 8, '0');
+        String byteString = null;
+
+        if (value instanceof Byte && ((Byte) value).intValue() < 0) {
+            byteString = new BigInteger(String.valueOf(0x100 + ((Byte) value).intValue())).toString(2).toUpperCase();
+        } else if (value instanceof Short && ((Short) value).intValue() < 0) {
+            byteString = new BigInteger(String.valueOf(0x10000 + ((Short) value).intValue())).toString(2).toUpperCase();
+        } else if (value instanceof Integer && ((Integer) value).intValue() < 0) {
+            byteString = new BigInteger(String.valueOf(0x10000 + ((Integer) value).intValue())).toString(2).toUpperCase();
+        } else {
+            byteString = new BigInteger(String.valueOf(value)).toString(2).toUpperCase();
+        }
+
+        return "0b" + Strings.padStart(byteString, 8, '0');
     }
 
     public static String hexValue(Object value) {
@@ -53,7 +64,7 @@ public class GameBoyUtils {
         } else if (value instanceof Short && ((Short) value).intValue() < 0) {
             hexString = new BigInteger(String.valueOf(0x10000 + ((Short) value).intValue())).toString(16).toUpperCase();
         } else if (value instanceof Integer && ((Integer) value).intValue() < 0) {
-               hexString = new BigInteger(String.valueOf(0x10000 + ((Integer) value).intValue())).toString(16).toUpperCase();
+            hexString = new BigInteger(String.valueOf(0x10000 + ((Integer) value).intValue())).toString(16).toUpperCase();
         } else {
             hexString = new BigInteger(String.valueOf(value)).toString(16).toUpperCase();
         }
