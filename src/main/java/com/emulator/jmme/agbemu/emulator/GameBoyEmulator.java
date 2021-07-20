@@ -24,8 +24,8 @@ public class GameBoyEmulator extends BaseEmulator {
 
             GameBoyCartridge gameBoyCartridge = GameBoyCartridgeFactory.makeCartridge(allBytes);
             ((GameBoyBus)bus).setCartridge(gameBoyCartridge);
-            ((GameBoyCPU)cpu).getRegisters().setPC(0x0100);
-            ((GameBoyCPU)cpu).getRegisters().setSP(0xFFFE);
+            ((GameBoyCPU)cpu).getRegisters().setPC((short)0x0100);
+            ((GameBoyCPU)cpu).getRegisters().setSP((short)0xFFFE);
             gameBoyCartridge.testPrint();
             while (true) {
                 cpu.pipeline(bus);

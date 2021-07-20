@@ -80,7 +80,7 @@ public class GameBoyCPU implements CPU {
                 instruction.invoke(this.instructions);
             }
 
-            this.registers.setPC(this.registers.getPC() + 1);
+            this.registers.setPC((short)(this.registers.getPC() + 1));
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {
@@ -99,11 +99,11 @@ public class GameBoyCPU implements CPU {
                     int nHigh = gameBoyBus.read_cartridge(registers.getPC() + 2) & 0xFF;
                     int address = nLow + (nHigh << 8);
                     params.add(address);
-                    registers.setPC(registers.getPC() + 2);
+                    registers.setPC((short)(registers.getPC() + 2));
                 } else if (gameBoyOpcode.name().contains("n")) {
                     int n = gameBoyBus.read_cartridge(registers.getPC() + 1) & 0xFF;
                     params.add(n);
-                    registers.setPC(registers.getPC() + 1);
+                    registers.setPC((short)(registers.getPC() + 1));
                 }
             } else if (GameBoyRegisters.class.equals(paramType)) {
                 params.add(registers);

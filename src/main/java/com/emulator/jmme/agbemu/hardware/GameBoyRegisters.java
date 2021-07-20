@@ -1,16 +1,16 @@
 package com.emulator.jmme.agbemu.hardware;
 
 public class GameBoyRegisters {
-    private short A;
-    private short B;
-    private short C;
-    private short D;
-    private short E;
-    private short F;
-    private short H;
-    private short L;
-    private int SP;
-    private int PC;
+    private byte A;
+    private byte B;
+    private byte C;
+    private byte D;
+    private byte E;
+    private byte F;
+    private byte H;
+    private byte L;
+    private short SP;
+    private short PC;
 
     public GameBoyRegisters() {
         A = 0b00000000;
@@ -25,7 +25,7 @@ public class GameBoyRegisters {
         PC = 0x0000;
     }
 
-    public GameBoyRegisters(short a, short b, short c, short d, short e, short f, short h, short l, int SP, int PC) {
+    public GameBoyRegisters(byte a, byte b, byte c, byte d, byte e, byte f, byte h, byte l, short SP, short PC) {
         A = a;
         B = b;
         C = c;
@@ -38,29 +38,29 @@ public class GameBoyRegisters {
         this.PC = PC;
     }
 
-    public short getA() {
+    public byte getA() {
         return A;
     }
 
-    public void setA(short a) {
+    public void setA(byte a) {
         A = a;
     }
 
-    public short getF() {
+    public byte getF() {
         return F;
     }
 
-    public void setF(short f) {
+    public void setF(byte f) {
         F = f;
     }
 
-    public int getAF() {
-        return A << 8 + F;
+    public short getAF() {
+        return (short)(A << 8 + F);
     }
 
-    public void setAF(int af) {
-        A = (short)(af >> 8);
-        F = (short)(af << 8 >> 8);
+    public void setAF(short af) {
+        A = (byte)(af >> 8);
+        F = (byte)(af << 8 >> 8);
     }
 
     public boolean getCFlag() {
@@ -68,7 +68,7 @@ public class GameBoyRegisters {
     }
 
     public void setCFlag(boolean cFlag) {
-        F = (short) ((cFlag) ? F | 0b00010000 : F & 0b11101111);
+        F = (byte) ((cFlag) ? F | 0b00010000 : F & 0b11101111);
     }
 
     public boolean getHFlag() {
@@ -76,7 +76,7 @@ public class GameBoyRegisters {
     }
 
     public void setHFlag(boolean hFlag) {
-        F = (short) ((hFlag) ? F | 0b00100000 : F & 0b11011111);
+        F = (byte) ((hFlag) ? F | 0b00100000 : F & 0b11011111);
     }
 
     public boolean getNFlag() {
@@ -84,7 +84,7 @@ public class GameBoyRegisters {
     }
 
     public void setNFlag(boolean nFlag) {
-        F = (short) ((nFlag) ? F | 0b01000000 : F & 0b10111111);
+        F = (byte) ((nFlag) ? F | 0b01000000 : F & 0b10111111);
     }
 
     public boolean getZFlag() {
@@ -92,97 +92,97 @@ public class GameBoyRegisters {
     }
 
     public void setZFlag(boolean zFlag) {
-        F = (short) ((zFlag) ? F | 0b10000000 : F & 0b01111111);
+        F = (byte) ((zFlag) ? F | 0b10000000 : F & 0b01111111);
     }
 
-    public short getB() {
+    public byte getB() {
         return B;
     }
 
-    public void setB(short b) {
+    public void setB(byte b) {
         B = b;
     }
 
-    public short getC() {
+    public byte getC() {
         return C;
     }
 
-    public void setC(short c) {
+    public void setC(byte c) {
         C = c;
     }
 
-    public int getBC() {
-        return B << 8 + C;
+    public short getBC() {
+        return (short)(B << 8 + C);
     }
 
-    public void setBC(int bc) {
-        B = (short)(bc >> 8);
-        C = (short)(bc << 8 >> 8);
+    public void setBC(short bc) {
+        B = (byte)(bc >> 8);
+        C = (byte)(bc << 8 >> 8);
     }
 
-    public short getD() {
+    public byte getD() {
         return D;
     }
 
-    public void setD(short d) {
+    public void setD(byte d) {
         D = d;
     }
 
-    public short getE() {
+    public byte getE() {
         return E;
     }
 
-    public void setE(short e) {
+    public void setE(byte e) {
         E = e;
     }
 
-    public int getDE() {
-        return D << 8 + E;
+    public short getDE() {
+        return (short)(D << 8 + E);
     }
 
-    public void setDE(int de) {
-        D = (short)(de >> 8);
-        E = (short)(de << 8 >> 8);
+    public void setDE(short de) {
+        D = (byte)(de >> 8);
+        E = (byte)(de << 8 >> 8);
     }
 
-    public short getH() {
+    public byte getH() {
         return H;
     }
 
-    public void setH(short h) {
+    public void setH(byte h) {
         H = h;
     }
 
-    public short getL() {
+    public byte getL() {
         return L;
     }
 
-    public void setL(short l) {
+    public void setL(byte l) {
         L = l;
     }
 
-    public int getHL() {
-        return H << 8 + L;
+    public short getHL() {
+        return (short)(H << 8 + L);
     }
 
-    public void setHL(int hl) {
-        H = (short)(hl >> 8);
-        L = (short)(hl << 8 >> 8);
+    public void setHL(short hl) {
+        H = (byte)(hl >> 8);
+        L = (byte)(hl << 8 >> 8);
     }
 
-    public int getSP() {
+    public short getSP() {
         return SP;
     }
 
-    public void setSP(int SP) {
+    public void setSP(short SP) {
         this.SP = SP;
     }
 
-    public int getPC() {
+    public short getPC() {
         return PC;
     }
 
-    public void setPC(int PC) {
+    public void setPC(short PC) {
         this.PC = PC;
     }
 }

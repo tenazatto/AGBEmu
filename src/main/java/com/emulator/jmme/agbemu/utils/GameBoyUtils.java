@@ -17,32 +17,47 @@ public class GameBoyUtils {
                                              Method instruction) {
         List params = new ArrayList<>();
         Arrays.stream(instruction.getParameterTypes()).forEach(paramType -> {
-            if(int.class.equals(paramType)) {
-                if (gameBoyOpcode.name().contains("nn")) {
-                    int nLow = gameBoyBus.read_cartridge(registers.getPC() + 1) & 0xFF;
-                    int nHigh = gameBoyBus.read_cartridge(registers.getPC() + 2) & 0xFF;
-                    int address = nLow + (nHigh << 8);
-                    params.add(address);
-                    registers.setPC(registers.getPC() + 2);
-                } else if (gameBoyOpcode.name().contains("n")) {
-                    int n = gameBoyBus.read_cartridge(registers.getPC() + 1) & 0xFF;
-                    params.add(n);
-                    registers.setPC(registers.getPC() + 1);
-                }
+            if (short.class.equals(paramType)) {
+//                if (gameBoyOpcode.name().contains("nn")) {
+                byte nLow = gameBoyBus.read_cartridge(registers.getPC() + 1);
+                byte nHigh = gameBoyBus.read_cartridge(registers.getPC() + 2);
+                short address = (short)(((nHigh & 0xFF) << 8) | (nLow & 0xFF));
+                params.add(address);
+                registers.setPC((short) (registers.getPC() + 2));
+//                }
+            } else if (byte.class.equals(paramType)) {
+//                else if (gameBoyOpcode.name().contains("n")) {
+                byte n = gameBoyBus.read_cartridge(registers.getPC() + 1);
+                params.add(n);
+                registers.setPC((short) (registers.getPC() + 1));
+//                }
             } else if (GameBoyRegisters.class.equals(paramType)) {
                 params.add(registers);
+            } else if (GameBoyBus.class.equals(paramType)) {
+                params.add(gameBoyBus);
             }
         });
         return params;
     }
 
     public static String byteValue(Object value) {
-        String hexString = new BigInteger(String.valueOf(value)).abs().toString(2).toUpperCase();
+        String hexString = new BigInteger(String.valueOf(value)).toString(2).toUpperCase();
         return "0b" + Strings.padStart(hexString, 8, '0');
     }
 
     public static String hexValue(Object value) {
-        String hexString = new BigInteger(String.valueOf(value)).abs().toString(16).toUpperCase();
+        String hexString = null;
+
+        if (value instanceof Byte && ((Byte) value).intValue() < 0) {
+            hexString = new BigInteger(String.valueOf(0x100 + ((Byte) value).intValue())).toString(16).toUpperCase();
+        } else if (value instanceof Short && ((Short) value).intValue() < 0) {
+            hexString = new BigInteger(String.valueOf(0x10000 + ((Short) value).intValue())).toString(16).toUpperCase();
+        } else if (value instanceof Integer && ((Integer) value).intValue() < 0) {
+               hexString = new BigInteger(String.valueOf(0x10000 + ((Integer) value).intValue())).toString(16).toUpperCase();
+        } else {
+            hexString = new BigInteger(String.valueOf(value)).toString(16).toUpperCase();
+        }
+
         return "0x" + Strings.padStart(hexString, 4, '0');
     }
 }

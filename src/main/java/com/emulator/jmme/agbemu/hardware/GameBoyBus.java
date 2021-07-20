@@ -22,11 +22,11 @@ public class GameBoyBus implements Bus {
         return this.cartridge.getContent()[address];
     }
 
-    public short read_memory(int address) {
+    public byte read_memory(short address) {
         return this.memory.getAddresses().get(address);
     }
 
-    public void write_memory(int address, short value) {
+    public void write_memory(short address, byte value) {
         this.memory.getAddresses().put(address, value);
     }
 }
